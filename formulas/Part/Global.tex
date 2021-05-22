@@ -1,0 +1,44 @@
+\chapter{Global}
+    %	XP
+    \section{XP needed to lvl up}
+        \begin{align*}
+            XP_{Class} = &\ 
+                \left\lfloor
+                \left( 15+{lvl}^{1.9}+11 \times lvl \right)
+                \times 
+                \left( 1.208 - \min \left\{ 0.164,\frac{0.215\times {lvl}}{{lvl} + 100} \right\} \right)^{lvl}-15
+                \right\rceil
+            \\ 
+            XP_{Skill} =  &\
+                \left\lfloor
+                \left( 15+{lvl}^{2}+15\times lvl \right)
+                \times 
+                \left( 1.225 - \min \left\{ 0.164,\frac{0.135\times {lvl}}{{lvl} + 50} \right\} \right)^{lvl}-30
+                \right\rfloor
+            \\ 
+            XP_{Smithing} =  &\
+                \left\lfloor
+                \left( 15+{lvl}^{2}+13\times lvl \right)
+                \times 
+                \left( 1.225 - \min \left\{ 0.164,\frac{0.135\times {lvl}}{{lvl} + 50} \right\} \right)^{lvl}-30
+                \right\rfloor
+        \end{align*}
+
+    %	Fighting Formula
+    \section{Fighting Formulas}
+        %	Damage Done
+        \subsection{Damage done}
+
+        %	Damage taken per hit
+        \subsection{Damage taken per hit}
+            \begin{align*}
+                Damage = &\
+                    \left\lceil
+                    \frac{ {attack}_{enemy} - 2.5 \times {defense}^{0.8} }
+                        { \max \left\{1,1+ \frac{ {defense}^{1.5}}
+                            {100} 
+                        \times \frac{ {defense} }
+                            { {\max \left\{1,{attack}_{enemy} \right\}} }\right\}
+                        }
+                    \right\rceil
+            \end{align*}

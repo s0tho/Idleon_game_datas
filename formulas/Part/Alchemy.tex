@@ -1,0 +1,66 @@
+\chapter{Alchemy}
+    %------------------------------------------------------------------------------
+    %	P2W_TAB
+    %------------------------------------------------------------------------------
+    \section{P2W tab}
+        %	Cauldron
+        \subsection{Cauldron}
+            \begin{align*}
+                regen_\% = &\ \frac{16 + 0.5 \times (regenLvl-1)}{15} \times regenLvl \times 3
+                \\ 
+                newBubble = &\ 1 + \frac{newBubbleLvl \times 2.5}{newBubbleLvl + 100}
+                \\
+                boostReqLow_\% = &\ 70 \times \frac{boostLvl}{100+boostLvl}
+            \end{align*}
+
+        %	Liquid
+        \subsection{Liquid}
+            \begin{align*}
+                regen_\% = &\ 400 \times \frac{regenLvl}{100+regenLvl}
+                \\
+                cap = &\ capLvl
+            \end{align*}
+            %	Figure : How much you gain with p2w
+            \pic{png}{p2w_regen_formula_graph}{How much regen you gain with p2w}{0.7}{h!}
+        %	Vials
+        \subsection{Vials}
+            \begin{align*}
+                cap =  &\ capLvl
+                \\
+                rng = &\ 250 \times \frac{rngLvl}{100+rngLvl}
+            \end{align*}
+
+        %	Player
+        \subsection{Player}
+            \begin{align*}
+                AlchSpeed_\% = &\ 35 \times \frac{AlchSpeedLvl}{100+AlchSpeedLvl} 
+                \\
+                ExtraXP_\% = &\ \frac{11 + 0.5 \times (ExtraXPLvl-1)}{10} \times ExtraXPLvl
+            \end{align*}
+    %------------------------------------------------------------------------------
+    %	Liquid \& Cauldron
+    %------------------------------------------------------------------------------
+    \section{Liquid \& Cauldron}
+        %	Liquid
+        \subsection{Liquid}
+            \begin{align*}
+                liquid_{/hour} = &\ 
+                    \left( 1 + \frac{ decant_\% + RLP2W_\% + vial_\% }{100} \right)
+                    \times 
+                    \left( 1+ \frac{ stamp_\% + \sum \left( (alchLvl * 2 + 4 )^{0.65} \right) }{100} \right)
+            \end{align*}
+            \begin{itemize}
+                \item $RLP2W_\%$ is P2W Liquid Regen
+            \end{itemize}
+            Multiply $liquid_{/hour}$ by 1.5 if you bought the gem upgrade.
+        
+
+        %	Cauldron
+        \subsection{Cauldron}
+            \imp{TODO}
+
+    %------------------------------------------------------------------------------
+    %	Bubble
+    %------------------------------------------------------------------------------
+    \section{Bubble}
+        \imp{TODO}

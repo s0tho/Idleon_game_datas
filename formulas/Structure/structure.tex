@@ -1,0 +1,176 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Arsclassica Article
+% Structure Specification File
+%
+% This file has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Lorenzo Pantieri (http://www.lorenzopantieri.net) with extensive modifications by:
+% Vel (vel@latextemplates.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	REQUIRED PACKAGES
+%----------------------------------------------------------------------------------------
+\usepackage[english]{babel} % english 
+\hbadness=99999  % or any number >=10000
+
+\usepackage[
+nochapters, % Turn off chapters since this is an article        
+beramono, % Use the Bera Mono font for monospaced text (\texttt)
+eulermath,% Use the Euler font for mathematics
+pdfspacing, % Makes use of pdftex’ letter spacing capabilities via the microtype package
+dottedtoc % Dotted lines leading to the page numbers in the table of contents
+]{classicthesis} % The layout is based on the Classic Thesis style
+
+\usepackage{arsclassica} % Modifies the Classic Thesis package
+
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage{fancyhdr} % Header and footer
+\usepackage{xcolor}
+% \usepackage{sectsty}
+\usepackage{etoolbox} 
+\patchcmd{\chapter}{\thispagestyle{plain}}{\thispagestyle{fancy}}{}{}
+\usepackage{lastpage}
+\usepackage{titleps}
+\usepackage{titlesec}
+
+\usepackage[default,oldstyle,scale=0.95]{opensans}
+\usepackage[defaultfam,tabular,lining]{montserrat}
+\renewcommand{\familydefault}{\sfdefault}
+
+\usepackage{csquotes}
+\usepackage[utf8]{inputenc} % Required for including letters with accents
+
+\usepackage{graphicx} % Required for including images
+\graphicspath{{Figures/}} % Set the default folder for images
+
+\usepackage{enumitem} % Required for manipulating the whitespace between and within lists
+
+\usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
+
+\usepackage{subfig} % Required for creating figures with multiple parts (subfigures)
+
+\usepackage{amsmath,amssymb,amsthm} % For including math equations, theorems, symbols, etc
+
+\usepackage{varioref} % More descriptive referencing
+\usepackage{changepage}
+\newenvironment{subs}
+  {\adjustwidth{3em}{0pt}}
+  {\endadjustwidth}
+
+\usepackage{multirow}
+\usepackage{hyperref}
+\usepackage{chngcntr}
+\usepackage{amssymb}
+\usepackage{multicol}
+\usepackage{array}
+
+\usepackage{eso-pic}
+\usepackage{tocloft}
+
+\counterwithin{figure}{section}
+\counterwithin{table}{section}
+\makeatletter
+\@addtoreset{chapter}{part}
+\makeatother 
+
+% \usepackage{movie15}
+
+\usepackage{geometry}
+ \geometry{
+ a4paper,
+ total={170mm,250mm},
+ left=20mm,
+ top=15mm,
+ }
+
+
+%----------------------------------------------------------------------------------------
+%	SECTION STYLE
+%---------------------------------------------------------------------------------------
+\definecolor{blue}{RGB}{0,51,153}
+
+\titleformat{\chapter}{\fontfamily{opensans}\sffamily\huge\bfseries\color{blue}}{\thechapter}{20pt}{\huge}
+\titleformat{\section}{\fontfamily{opensans}\sffamily\Large\bfseries\color{blue}}{\thesection}{1em}{}
+\titleformat{\subsection}{\fontfamily{opensans}\sffamily\bfseries\color{blue}}{\hspace{1cm}}{0.5em}{\thesubsection\quad}
+
+%----------------------------------------------------------------------------------------
+%	CODING STYLE
+%---------------------------------------------------------------------------------------
+
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+
+\lstdefinestyle{mystyle}{
+keywordstyle=\color{magenta},
+commentstyle=\color{mygray},
+basicstyle=\ttfamily,
+showstringspaces=false,
+belowcaptionskip=1\baselineskip,
+breaklines=true,
+}
+\lstset{style=mystyle}
+
+%----------------------------------------------------------------------------------------
+%	THEOREM STYLES
+%---------------------------------------------------------------------------------------
+
+\theoremstyle{definition} % Define theorem styles here based on the definition style (used for definitions and examples)
+\newtheorem{definition}{Definition}
+
+\theoremstyle{plain} % Define theorem styles here based on the plain style (used for theorems, lemmas, propositions)
+\newtheorem{theorem}{Theorem}
+
+\theoremstyle{remark} % Define theorem styles here based on the remark style (used for remarks and notes)
+
+
+%----------------------------------------------------------------------------------------
+%	HYPERLINKS
+%---------------------------------------------------------------------------------------
+
+\hypersetup{
+%draft, % Uncomment to remove all links (useful for printing in black and white)
+colorlinks=true, breaklinks=true,bookmarksnumbered,
+urlcolor=webbrown, linkcolor=RoyalBlue, citecolor=webgreen, % Link colors
+pdftitle={}, % PDF title
+pdfauthor={\textcopyright}, % PDF Author
+pdfsubject={}, % PDF Subject
+pdfkeywords={}, % PDF Keywords
+pdfcreator={pdfLaTeX}, % PDF Creator
+pdfproducer={LaTeX with hyperref and ClassicThesis} % PDF producer
+}
+
+
+\renewcommand{\cftchapfont}{\Large\color{blue}}  
+\renewcommand{\cftsecfont}{\color{blue}}
+
+\pagestyle{fancy}
+\fancyfoot[C]{}
+
+\makeatletter
+\renewcommand{\maketitle}{\bgroup\setlength{\parindent}{0pt}
+\begin{flushleft}
+  \textbf{\@title}
+  ~\newline
+  \newline
+  \@date
+  ~\newline
+  \newline
+  \@author
+\end{flushleft}\egroup
+}
+\makeatother
+
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\renewcommand{\chaptermark}[1]{\markboth{\MakeUppercase{#1}}{}}
+
+

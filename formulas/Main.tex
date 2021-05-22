@@ -1,0 +1,49 @@
+\documentclass[a4paper]{report}
+\input{structure/structure.tex}
+\input{structure/commands.tex}
+
+
+\title{
+\vfil
+\begin{center}
+        \textbf{{\color{mygray}\fontsize{32}{60}\selectfont Idleon Formulas}}
+\end{center}
+}
+\author{Sacrezar}
+\date{21/05/2021}
+
+
+\begin{document}
+%------------------------------------------------------------------------------
+%	First Page
+%------------------------------------------------------------------------------
+\maketitle
+\newpage
+
+\rfoot{\thepage \hspace{1pt}/\pageref{LastPage}}
+\lfoot{\small\textcolor{gray}{}}
+\fancyfoot[C]{}
+\rhead{}
+\lhead{}
+\setlength{\headheight}{7.50mm}
+
+\tableofcontents
+\def\table{\def\figurename{Table}\figure}
+\let\endtable\endfigure 
+\listoffigures
+%------------------------------------------------------------------------------
+%	STRUCTURE
+%-----------------------------------------------------------------------------
+
+\input{Part/Introduction.tex}
+\input{Part/Global.tex}
+\input{Part/Talents.tex}
+\input{Part/Alchemy.tex}
+\input{Part/Post_Office.tex}
+\input{Part/Others.tex}
+
+\renewcommand\bibname{References} % For modifying the bibliography heading
+\bibliographystyle{unsrt}
+\bibliography{Appendice/reference.bib} % The file containing the bibliography
+\nocite{*}
+\end{document}
