@@ -1,6 +1,6 @@
 <div align="center" id="top">
   <p>
-    <h1>Idleon Game Datas</h1>
+    <h1>Idleon Game Datas v0.0.1</h1>
     <h5>An idleon related repository</h5>
   <p>
 </div>
