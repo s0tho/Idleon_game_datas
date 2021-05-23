@@ -138,6 +138,8 @@ nitrogen_p2w = 25
 water_decant = 5
 nitrogen_decant = 11
 bleach = [True, False]
+
+
 data = {
     "p2w": [water_p2w, nitrogen_p2w],
     "decant" : [water_decant, nitrogen_decant],

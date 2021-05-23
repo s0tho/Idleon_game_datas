@@ -1,10 +1,72 @@
 \chapter{Other}
+
 %------------------------------------------------------------------------------
-%	test
+%	Teleportation Cap
 %------------------------------------------------------------------------------
-\section{Boxes}
+\section{Teleportation Cap}
+    \begin{align*}
+        {TP}_{cap} = 21(1+n)
+    \end{align*}
+    Where $n$ is the number of time you bought Daily Teleports.
+
+%------------------------------------------------------------------------------
+%	Statues
+%------------------------------------------------------------------------------
+\section{Statues}
+    \begin{align*}
+        Cost = &\
+            \left\lfloor 
+            lvl^{1.17} \times 1.35^{\frac{lvl}{10}}+1 
+            \right\rceil 
+        \\ 
+        Bonus = &\
+        \left\lfloor 
+        Base \times lvl
+        \right\rceil 
+    \end{align*}
+
+%------------------------------------------------------------------------------
+%	Stamps
+%------------------------------------------------------------------------------
+\section{Stamps}
+    \begin{align*}
+        baseCost_{Coin} = &\ Price_{base} \times \left(1-\frac{bribe}{100}\right) 
+    \end{align*}
+    As of v1.14, the bribe effect is 8\%, not 5\%.
+    \begin{align*}
+        {Cost}_{Coin} = &\
+            \left(1-\frac{vial_\%}{100}\right) \times 
+            \left\lfloor 
+                baseCost_{Coin} \times \left( i_{10} - \left( \frac{lvl}{lvl+5*lvlRange} \times 0.25 \right) \right)^{lvl \times \frac{10}{lvlRange}} 
+            \right\rfloor 
+    \\
+    {Cost}_{Material} = &\
+        \left\lfloor 
+            baseCost_{Material} \times {i_8}^{
+                \left\lfloor \frac{lvl}{lvlRange-1}^{0.8}\right\rceil  
+            }
+        \right\rfloor
+        \times \max \left\{ 0.1, 1-\frac{vial_\%}{100} \right\}
+    \end{align*}
+    \begin{itemize}
+        \item $vial_\%$ is the Blue Flav vial effect.
+        \item $lvlRange$ is the number of time you can lvl up a stamp before having to pay using materials.
+        \item $i_{8}$ and $i_{10}$ are value you can find in the code or in the wiki, look for data-i in the .stampdiv of the stamp you want to know about.
+    \end{itemize}
+
+%------------------------------------------------------------------------------
+%	Forge
+%------------------------------------------------------------------------------
+\section{Forge}
+    \imp{TODO}
+
+\newpage
+%------------------------------------------------------------------------------
+%	Boxes
+%------------------------------------------------------------------------------
+\section{Shipments}
     \begin{center}
-        \imp{Beware, the prowess effect in each box affect only the concerned skill although it's only written "prowess".}
+        \imp{Beware, the prowess effect in each Shipment affect only the concerned skill although it's only written "prowess".}
     \end{center}
     %	Civil War Memory
     \subsection{Civil War Memory}
