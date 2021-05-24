@@ -31,6 +31,6 @@ plt.ylabel("Points given")
 plt.title("Where to stop leveling up Stonks!")
 plt.legend(loc='best')
 # log y
-# plt.semilogy()
+plt.semilogy()
 plt.grid(True, linewidth=0.5, linestyle='--')
 plt.show()

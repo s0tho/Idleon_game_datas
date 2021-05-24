@@ -18,6 +18,9 @@ def get_decant(decant_lvl):
     return DECANT*decant_lvl
 
 def get_vial(vial_lvl):
+    if vial_lvl > 10:
+        print("\nVial LVL can't be higher than 10, it will be considered lvl 10.")
+        vial_lvl = 10
     return VIAL*vial_lvl
 
 def get_stamp(stamp_lvl):
@@ -99,8 +102,7 @@ def compare_sources(data,char_lvl,bleach,enum=[1]):
                     i.upper() + f" +{level} lvl:", 
                     res[i], 
                     "+" + str(round(((res[i]/initial)*100)-100,2))))
-
-        print()
+            print()
 
 def compare_p2w(p2w_lvl_a, p2w_lvl_b):
     return round(
@@ -130,12 +132,12 @@ vial_lvl = 5
 stamp_lvl = 25
 #LIQUIDS
 char_lvl = [
-    [36,33,35],
+    [37,34,36],
     []
 ]
 water_p2w = 61
 nitrogen_p2w = 25
-water_decant = 5
+water_decant = 7
 nitrogen_decant = 11
 bleach = [True, False]
 
@@ -147,7 +149,7 @@ data = {
     "stamp" : stamp_lvl,
 }
 
-enum=[1,5,10,15]
+enum=[1,5,10]
 
 compare_sources(data, char_lvl, bleach, enum)
 
