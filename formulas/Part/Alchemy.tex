@@ -1,8 +1,45 @@
 \chapter{Alchemy}
     %------------------------------------------------------------------------------
+    %	Liquid \& Cauldron
+    %------------------------------------------------------------------------------
+    \section{Liquid \& Cauldron}
+        %	Liquid
+        \subsection{Liquid}
+            \begin{align*}
+                liquid_{/hour} = &\ 
+                    \left( 1 + \frac{ decant_\% + RLP2W_\% + vial_\% }{100} \right)
+                    \times 
+                    \left( 1+ \frac{ stamp_\% + \sum \left( (alchLvl * 2 + 4 )^{0.65} \right) }{100} \right)
+            \end{align*}
+            \begin{itemize}
+                \item $RLP2W_\%$ is P2W Liquid Regen, see \ref{sec:p2w}
+            \end{itemize}
+            Multiply $liquid_{/hour}$ by $1.5$ if you bought the gem upgrade.
+        
+
+        %	Cauldron
+        \subsection{Cauldron}
+            \begin{align*}
+                newBubbleCost = &\ 3 + (3n)^{2.2} \times 1.3^n
+            \end{align*}
+            \begin{itemize}
+                \item $n$ is your number of bubbles unlocked.
+            \end{itemize}
+            \imp{TODO}
+
+    \newpage
+    %------------------------------------------------------------------------------
+    %	Bubble
+    %------------------------------------------------------------------------------
+    \section{Bubble}
+        \imp{TODO}
+
+    \newpage
+    %------------------------------------------------------------------------------
     %	P2W_TAB
     %------------------------------------------------------------------------------
-    \section{P2W tab}
+    \section{P2W tab}\label{sec:p2w}
+        Every p2w related formulas
         %	Cauldron
         \subsection{Cauldron}
             \begin{align*}
@@ -22,7 +59,7 @@
                     \right\rceil 
                 \\
                 \\
-                boostReqLow_\% = &\ 70 \times \frac{boostLvl}{100+boostLvl}
+                boostReqLow_\% = &\  \frac{70 \times boostLvl}{100+boostLvl}
                 \\
                 boostReqLow_{Cost} = &\ 
                     \left\lfloor 
@@ -34,7 +71,7 @@
         %	Liquid
         \subsection{Liquid}
             \begin{align*}
-                regen_\% = &\ 400 \times \frac{regenLvl}{100+regenLvl}
+                regen_\% = &\  \frac{400 \times regenLvl}{100+regenLvl}
                 \\ 
                 regen_{Cost} = &\ 
                     \left\lfloor 
@@ -62,7 +99,7 @@
                     \right\rceil 
                 \\ 
                 \\
-                rng = &\ 250 \times \frac{rngLvl}{100+rngLvl}
+                rng = &\  \frac{250 \times rngLvl}{100+rngLvl}
                 \\ 
                 rng_{Cost} = &\ 
                     \left\lfloor 
@@ -74,7 +111,7 @@
         %	Player
         \subsection{Player}
             \begin{align*}
-                AlchSpeed_\% = &\ 35 \times \frac{AlchSpeedLvl}{100+AlchSpeedLvl} 
+                AlchSpeed_\% = &\ \frac{35 \times AlchSpeedLvl}{100+AlchSpeedLvl} 
                 \\ 
                 AlchSpeed_{Cost} = &\ 
                     \left\lfloor 
@@ -89,30 +126,3 @@
                     6000\left(1.15-\frac{0.09AlchSpeedLvl}{100+AlchSpeedLvl}^{AlchSpeedLvl}\right) 
                 \right\rceil 
             \end{align*}
-    %------------------------------------------------------------------------------
-    %	Liquid \& Cauldron
-    %------------------------------------------------------------------------------
-    \section{Liquid \& Cauldron}
-        %	Liquid
-        \subsection{Liquid}
-            \begin{align*}
-                liquid_{/hour} = &\ 
-                    \left( 1 + \frac{ decant_\% + RLP2W_\% + vial_\% }{100} \right)
-                    \times 
-                    \left( 1+ \frac{ stamp_\% + \sum \left( (alchLvl * 2 + 4 )^{0.65} \right) }{100} \right)
-            \end{align*}
-            \begin{itemize}
-                \item $RLP2W_\%$ is P2W Liquid Regen
-            \end{itemize}
-            Multiply $liquid_{/hour}$ by 1.5 if you bought the gem upgrade.
-        
-
-        %	Cauldron
-        \subsection{Cauldron}
-            \imp{TODO}
-
-    %------------------------------------------------------------------------------
-    %	Bubble
-    %------------------------------------------------------------------------------
-    \section{Bubble}
-        \imp{TODO}

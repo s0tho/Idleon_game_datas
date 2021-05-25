@@ -129,17 +129,17 @@ def plot_p2w():
 
 # ACCOUNT WIDE
 vial_lvl = 5
-stamp_lvl = 25
+stamp_lvl = 29
 #LIQUIDS
 char_lvl = [
-    [37,34,36],
+    [39,35,37],
     []
 ]
 water_p2w = 61
 nitrogen_p2w = 25
 water_decant = 7
 nitrogen_decant = 11
-bleach = [True, False]
+bleach = [True, True]
 
 
 data = {
@@ -149,7 +149,7 @@ data = {
     "stamp" : stamp_lvl,
 }
 
-enum=[1,5,10]
+enum=[20]
 
 compare_sources(data, char_lvl, bleach, enum)
 

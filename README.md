@@ -13,5 +13,6 @@ You can find formulas here:
            <strong>FORMULAS</strong>
   </a>
 </div>
+Scripts aren't easily readable/usable yet.
 
 *[Here](https://www.youtube.com/watch?v=dQw4w9WgXcQ) you can see my others scripts.*
