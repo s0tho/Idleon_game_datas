@@ -1,12 +1,13 @@
 from matplotlib import pyplot as plt
 import numpy as np
+import math
 
 DECANT = 0.02
 VIAL = 0.01
 STAMP = 0.01
 BLEACH = 1.5
 NOT_BLEACH = 1 
-LIQUIDS = ["Water", "Nitrogen"]
+LIQUIDS = ["Water"]
 
 def get_p2w(p2w_lvl):
     if not isinstance(p2w_lvl, np.ndarray):
@@ -63,7 +64,7 @@ def compare_sources(data,char_lvl,bleach,enum=[1]):
         for i in range(len(LIQUIDS)):
             initial = calc_liquidh(
                     p2w_lvl = data["p2w"][i],
-                    decant_lvl = data["decant"][i],
+                    decant_lvl = data["decant_rate"][i],
                     vial_lvl = data["vial"],
                     stamp_lvl = data["stamp"],
                     chars_lvl = char_lvl[i],
@@ -77,7 +78,7 @@ def compare_sources(data,char_lvl,bleach,enum=[1]):
 
                 liquidh = calc_liquidh(
                     p2w_lvl = data["p2w"][i],
-                    decant_lvl = data["decant"][i],
+                    decant_lvl = data["decant_rate"][i],
                     vial_lvl = data["vial"],
                     stamp_lvl = data["stamp"],
                     chars_lvl = char_lvl[i],
@@ -95,10 +96,10 @@ def compare_sources(data,char_lvl,bleach,enum=[1]):
 
             print("====== " + LIQUIDS[i].upper() + " ======")
             print()
-            print('{:>15} {:>8.4f} /h'.format("INITIAL:", initial))
+            print('{:>20} {:>8.4f} /h'.format("INITIAL:", initial))
             print()
             for i in res:
-                print('{:>15} {:>8.4f} /h {:>7}%'.format(
+                print('{:>20} {:>8.4f} /h {:>7}%'.format(
                     i.upper() + f" +{level} lvl:", 
                     res[i], 
                     "+" + str(round(((res[i]/initial)*100)-100,2))))
@@ -127,31 +128,71 @@ def plot_p2w():
 
     plt.show()
 
+def plot_p2w_vs_stamp():
+    z = np.linspace(0,100,100)
+    # z = 3
+    vial = 0.0667
+    bribe = 0.08
+    vial = 0
+    bribe = 0
+    p2w_cost = 2500 * pow(1.19 - (0.135 * z)/(100 +z), z)
+
+    stamp_effect = z+1 - z
+    p2w_effect = get_p2w(z+1) - get_p2w(z)
+
+    colors = iter(["#5B6CEB", "#48CDD4"])
+
+    for j, i in enumerate([0, 10]):
+        vial = round(((30*i)/(7+i))/100, 4)
+        stamp_cost = (1-vial) * ( 
+        (1000*(1-bribe)) * pow(
+            1.3 - (z/(z+5*5) * 0.25), 
+            z * (10/5)
+            ) 
+        )
+        plt.plot(stamp_effect/stamp_cost, label = f"Drippy Drop Stamp (Blue Flav = {vial})", color=next(colors), dashes=(5, 1))
+    plt.plot(p2w_effect/p2w_cost, label = "P2W Regen", color="red")
+    plt.semilogy()
+    plt.xlabel("LVL")
+    plt.ylabel("gain per cost per lvl")
+    plt.legend(loc='best')
+    plt.xticks(range(0,101,5))
+    plt.grid(True, linewidth=0.5, linestyle='--')
+    plt.show()
+
+plot_p2w_vs_stamp()
+
+z = 99
+print(
+    2500 * pow(1.19 - (0.135 * z)/(100 +z), z),
+    get_p2w(z+1) - get_p2w(z)
+)
+
 # ACCOUNT WIDE
 vial_lvl = 5
 stamp_lvl = 29
 #LIQUIDS
 char_lvl = [
-    [39,35,37],
+    [40,36,38],
     []
 ]
 water_p2w = 61
 nitrogen_p2w = 25
-water_decant = 7
+water_decant = 9
 nitrogen_decant = 11
 bleach = [True, True]
 
-
 data = {
     "p2w": [water_p2w, nitrogen_p2w],
-    "decant" : [water_decant, nitrogen_decant],
+    "decant_rate" : [water_decant, nitrogen_decant],
     "vial" : vial_lvl,
     "stamp" : stamp_lvl,
 }
 
-enum=[20]
 
-compare_sources(data, char_lvl, bleach, enum)
+enum=[1,5,10]
+
+# compare_sources(data, char_lvl, bleach, enum)
 
 # print(
 #     "Gain: " 
@@ -160,3 +201,4 @@ compare_sources(data, char_lvl, bleach, enum)
 # )
 
 # plot_p2w()
+
