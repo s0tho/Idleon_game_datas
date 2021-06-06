@@ -79,8 +79,9 @@ for i in bonuses_per_character:
     plt.plot(xpoints,ypoints, label=f"({character}) : {bonus_name}", dashes=dashes)
 
 plot.set_conf(
-    x = (0,201,5),
-    y = (0,50,2)
+    x = (0,201,10),
+    y = (0,50,2),
+    xlab = "Character's lvl"
 )
 
 plt.show()

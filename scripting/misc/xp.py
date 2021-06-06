@@ -7,6 +7,7 @@ import math
 xp_dic = {
     "class" :       (15, 1.9, 11, 1.208, 0.164, 0.215, 100, 15),
     "skill" :       (15, 2.0, 15, 1.225, 0.164, 0.135,  50, 30),
+    "alchemy" :     (15, 2.0, 15, 1.225, 0.18, 0.135,  50, 30),
     "smithing" :    (15, 2.0, 13, 1.225, 0.164, 0.135,  50, 30),
     "construction": (10, 2.81, 4, 1.117, math.inf, 0.135,  5, 6),
     "worship" :     (15, 1.3, 6, 1.17, 0.07, 0.135,  50, 26),
@@ -58,21 +59,21 @@ count=0
 plt.subplot(212)
 for i in xp_dic:
     if count != 0:
-        plot_xp(i, label=i, log=True, size = (0, 101, 10))
+        plot_xp(i, label=i, log=True, size = (0, 51, 5))
     count += 1
 
 plt.show()
 
 
-for i in range(15):
-    print(
-        f"LVL {i+1}: ",
-        xp_formula(
-            i+1,
-            "construction"
-        )
-    )
+# for i in range(15):
+#     print(
+#         f"LVL {i+1}: ",
+#         xp_formula(
+#             i+1,
+#             "construction"
+#         )
+#     )
 
-print(
-    xp_formula(12, "construction")
-)
+# print(
+#     xp_formula(43, "alchemy")
+# )
