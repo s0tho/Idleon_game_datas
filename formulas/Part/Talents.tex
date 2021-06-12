@@ -1,5 +1,29 @@
 \chapter{Talents}
     %------------------------------------------------------------------------------
+    %	Shaman
+    %------------------------------------------------------------------------------
+    \section{Shaman}
+        %	Bubble Breakthrough
+        \subsection{Bubble Breakthrough}
+            \bug{XP doesn't work (v1.21)}
+            \begin{align*}
+                xp_\% = &\ lvl
+                \\ 
+                odds_\% = &\ \frac{51 + 0.5(lvl-1)}{50} \times lvl
+            \end{align*}
+            %	Figure : Bubble Breakthrough Effect
+            \pic{png}{Talent-FG-Bubble_Breakthrough}{Bubble Breakthrough Effect}{0.8}{h!}
+
+        \newpage
+        %	Virile Vials
+        \subsection{Virile Vials}
+        \begin{align*}
+            damage_\% = &\ nbVials \times  \frac{12*lvl}{lvl+100}
+        \end{align*}
+            %	Figure : irile Vials effect
+            \pic{png}{Talent-FG-Viril_Vials}{Virile Vials effect}{0.6}{h!}
+    \newpage       
+    %------------------------------------------------------------------------------
     %	Star Talents
     %------------------------------------------------------------------------------
     \section{Star Talents}
@@ -9,4 +33,30 @@
         Points = \frac{130 \times x}{x+50}
         $$
         %	Figure : Where to stop leveling up Stonks!
-        \pic{png}{stonk_formula_graph}{Where to stop leveling up Stonks!}{0.7}{h!}
+        \pic{png}{Talent-FG-Stonks!}{Where to stop leveling up Stonks! (with/out logarithmic scaling)}{0.63}{h!}
+
+        \subsection{Tick Tock}
+        \begin{align*}
+            AFKGainRate_\% = &\ \frac{8lvl}{lvl + 50}
+        \end{align*}
+        %	Figure : Tick Tock Effect
+        \pic{png}{Talent-FG-Tick_Tock}{Tick Tock Effect}{.6}{h!}
+
+        \subsection{Just EXP}
+        \begin{align*}
+            AFKGainRate_\% = &\ \frac{10lvl}{lvl + 50}
+        \end{align*}
+        %	Figure : Just EXP Effect
+        \pic{png}{Talent-FG-Just_EXP}{Just EXP Effect}{.6}{h!}
+        \subsection{Printer Sampling}
+        \begin{align*}
+            Sampled = &\ 10 + 0.075 * lvl
+        \end{align*}
+
+        \subsection{Shrine Architect}
+        \begin{align*}
+            AFKGainRate_\% = &\ \frac{50lvl}{lvl + 50}
+        \end{align*}
+        So for each afk claim, shrines would gain $afkTime \times AFKGainRate_\%$: 
+        %	Figure : Shrine Architect Effect
+        \pic{png}{Talent-FG-Shrine_Architect}{Shrine Architect Effect considering afk claim time}{0.6}{h!}

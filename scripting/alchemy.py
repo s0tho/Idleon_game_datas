@@ -5,6 +5,7 @@ import math
 DECANT = 0.02
 VIAL = 0.01
 STAMP = 0.01
+SALTLICK = 0.01
 BLEACH = 1.5
 NOT_BLEACH = 1 
 LIQUIDS = ["Water"]
@@ -19,13 +20,16 @@ def get_decant(decant_lvl):
     return DECANT*decant_lvl
 
 def get_vial(vial_lvl):
-    if vial_lvl > 10:
-        print("\nVial LVL can't be higher than 10, it will be considered lvl 10.")
-        vial_lvl = 10
+    if vial_lvl > 12:
+        print("\nVial LVL can't be higher than 12, it will be considered lvl 12.")
+        vial_lvl = 12
     return VIAL*vial_lvl
 
 def get_stamp(stamp_lvl):
     return STAMP*stamp_lvl
+
+def get_saltlick(saltlick):
+    return SALTLICK*saltlick
 
 def get_charlvl(chars_lvl):
     if chars_lvl:
@@ -46,12 +50,13 @@ def calc_liquidh(
         decant_lvl = 0,
         vial_lvl = 0,
         stamp_lvl = 0,
+        salt_lick = 0,
         chars_lvl = [0,0,0],
         bleach=False
     ):
 
     waterh_f1 = 1 + get_decant(decant_lvl) + get_p2w(p2w_lvl) + get_vial(vial_lvl)
-    waterh_f2 = 1 + get_stamp(stamp_lvl) + get_charlvl(chars_lvl)
+    waterh_f2 = 1 + get_stamp(stamp_lvl) + get_charlvl(chars_lvl) + get_saltlick(salt_lick)
     bleach = isBleach(bleach)
 
     waterh = bleach * waterh_f1 * waterh_f2
@@ -67,6 +72,7 @@ def compare_sources(data,char_lvl,bleach,enum=[1]):
                     decant_lvl = data["decant_rate"][i],
                     vial_lvl = data["vial"],
                     stamp_lvl = data["stamp"],
+                    salt_lick = data["salt_lick"],
                     chars_lvl = char_lvl[i],
                     bleach=bleach[i]
                 )
@@ -81,6 +87,7 @@ def compare_sources(data,char_lvl,bleach,enum=[1]):
                     decant_lvl = data["decant_rate"][i],
                     vial_lvl = data["vial"],
                     stamp_lvl = data["stamp"],
+                    salt_lick = data["salt_lick"],
                     chars_lvl = char_lvl[i],
                     bleach=bleach[i]
                 )
@@ -137,7 +144,7 @@ def plot_p2w_vs_stamp():
     bribe = 0
     p2w_cost = 2500 * pow(1.19 - (0.135 * z)/(100 +z), z)
 
-    stamp_effect = z+1 - z
+    stamp_effect = (z+1 - z)/100
     p2w_effect = get_p2w(z+1) - get_p2w(z)
 
     colors = iter(["#5B6CEB", "#48CDD4"])
@@ -160,26 +167,32 @@ def plot_p2w_vs_stamp():
     plt.grid(True, linewidth=0.5, linestyle='--')
     plt.show()
 
-plot_p2w_vs_stamp()
+    print(stamp_effect)
+    print(p2w_effect)
 
-z = 99
-print(
-    2500 * pow(1.19 - (0.135 * z)/(100 +z), z),
-    get_p2w(z+1) - get_p2w(z)
-)
+# plot_p2w_vs_stamp()
+# z  = 35
+# print(1000*(1-0) * pow(1.3 - (z/(z+5*5) * 0.25), z * (10/5)))
+
+# z = 99
+# print(
+#     2500 * pow(1.19 - (0.135 * z)/(100 +z), z),
+#     get_p2w(z+1) - get_p2w(z)
+# )
 
 # ACCOUNT WIDE
 vial_lvl = 5
-stamp_lvl = 29
+stamp_lvl = 35
 #LIQUIDS
 char_lvl = [
-    [40,36,38],
+    [45,42,36],
     []
 ]
-water_p2w = 61
+water_p2w = 67
 nitrogen_p2w = 25
-water_decant = 9
-nitrogen_decant = 11
+water_decant = 12
+nitrogen_decant = 14
+salt_lick = 14
 bleach = [True, True]
 
 data = {
@@ -187,12 +200,13 @@ data = {
     "decant_rate" : [water_decant, nitrogen_decant],
     "vial" : vial_lvl,
     "stamp" : stamp_lvl,
+    "salt_lick" : salt_lick
 }
 
 
-enum=[1,5,10]
+enum=[1,5,50]
 
-# compare_sources(data, char_lvl, bleach, enum)
+compare_sources(data, char_lvl, bleach, enum)
 
 # print(
 #     "Gain: " 

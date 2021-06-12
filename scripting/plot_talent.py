@@ -23,7 +23,7 @@ def create_plot(values, mult, y, label=None, set=[10, 100, 1000]):
         )
 
         plot.set_conf(
-            x = (1, 201, 15),
+            x = (0, 201, 15),
             y = y
         )
 
@@ -32,7 +32,7 @@ z = np.linspace(1,200,200)
 plot = Ploting()
 
 # Meatshank formula
-values = set_formula(100, 80, z, "decay")
+values = set_formula(12, 100, z, "decay")
 
 values_per_lvl = []
 values_per_lvl.append(values[0])
@@ -42,15 +42,15 @@ for i in range(len(values)-1):
     )
 values_per_lvl = np.array(values_per_lvl)
 
-mult = "math.log(j,10)"
-label = "hp"
-set = [1, 10, 100]
+mult = "j"
+label = "nb vial"
+set = [1, 5, 10,20,30,40,60]
 
 plot.subplot(211)
 create_plot(
     values,
     mult,
-    (0, 401, 25),
+    (0, 501, 50),
     label,
     set
 )

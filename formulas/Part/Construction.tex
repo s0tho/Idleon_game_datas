@@ -1,1 +1,74 @@
 \chapter{Construction}
+    %------------------------------------------------------------------------------
+    %	Refinery
+    %------------------------------------------------------------------------------
+    \section{Refinery}
+        \information{Power Cap is hardcoded}
+        \begin{align*}
+            powerPerCycle = &\ \left\lfloor rank^{1.3}\right\rfloor 
+            \\
+            CostsMulti = &\ baseMat \times \left\lfloor rank^{1.5}\right\rfloor 
+        \end{align*}
+        Same but per hour:
+        \begin{align*}
+            powerPerCycle_{/hour} = &\ \frac{1}{baseTime \times (1-cycleTimeReduction)} \times \left\lfloor rank^{1.3}\right\rfloor 
+            \\
+            CostsMulti_{/hour} = &\ baseMat \times \frac{1}{baseTime \times (1-cycleTimeReduction)} \times \left\lfloor rank^{1.5}\right\rfloor 
+        \end{align*}
+        \begin{itemize}
+            \item $baseMat$ : base cost for material (same for salt if you're wondering);
+            \item $baseTime$ : Base time - 0.25 for first tab, 1 for second.
+            \item $cycleTimeReduction$ : $\frac{SpdBonus}{100}$
+            \item $SpdBonus$ : bonuses affecting cycle speed (salt lick upgrade or vial).
+        \end{itemize}
+        Calculations you may want to do:
+        \begin{align*}
+            nbCyclesToRankUp = &\ \frac{powerCap}{\left\lfloor rank^{1.3}\right\rfloor } 
+            \\ 
+            timeToRankUp = &\ nbCyclesToRankUp \times baseTime \times (1-cycleTimeReduction)
+        \end{align*}
+    %------------------------------------------------------------------------------
+    %	Cost
+    %------------------------------------------------------------------------------
+    \section{Cost}
+        \todo{Add cost (build and resources cost) for every building}
+
+    %------------------------------------------------------------------------------
+    %	Cogs Generation
+    %------------------------------------------------------------------------------
+    \section{Cogs generation}
+        \todo{Add Xores' explanation about cogs}
+    %------------------------------------------------------------------------------
+    %	Shrine
+    %------------------------------------------------------------------------------
+    \section{Shrine}
+        \begin{align*}
+            timeToLvlUp = &\ \left\lfloor 20(lvl-1)+6lvl \times 1.63^{lvl-1}\right\rfloor 
+        \end{align*}
+        \todo{bonus per lvl}
+    %------------------------------------------------------------------------------
+    %	Buildings
+    %------------------------------------------------------------------------------
+    \section{Buildings}
+        %	Salt lick upgrade
+        \subsection{Salt lick upgrade}
+            \begin{center}
+                \begin{tabular}{ ccc } 
+                    Upgrade & Base cost & x
+                    \\
+                    \hline
+                    1 & 5 & 1.5 \\ 
+                    2 & 100 & 1.8 \\ 
+                    3 & 5 & 2.2 \\
+                    4 & 250 & 1.3 \\ 
+                    5 & 5 & 2.2 \\ 
+                    6 & 100 & 1.2 \\
+                    7 & 5 & 2 \\ 
+                    8 & 100 & 1.3 \\ 
+                    9 & 5 & 2.2 \\
+                    10 & 250 & 1.1 \\
+                \end{tabular}
+            \end{center}
+            \begin{align*}
+                upgrade_{SaltPrice} = &\ \left\lfloor x^{lvl} * baseCost \right\rfloor 
+            \end{align*}

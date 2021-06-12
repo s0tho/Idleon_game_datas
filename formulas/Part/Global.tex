@@ -1,6 +1,9 @@
 \chapter{Global}
     %	XP
     \section{XP needed to lvl up}
+    Every skills use the same formula except Smithing, Alchemy, Construction and Worship.
+    \newline
+    \todo{I have to verify this; might be wrong now}
         \begin{align*}
             XP_{Class} = &\ 
                 \left\lfloor
@@ -22,8 +25,32 @@
                 \times 
                 \left( 1.225 - \min \left\{ 0.164,\frac{0.135\times {lvl}}{{lvl} + 50} \right\} \right)^{lvl}-30
                 \right\rfloor
+            \\ 
+            XP_{Alchemy} =  &\
+            \left\lfloor
+            \left( 15+{lvl}^{2}+15\times lvl \right)
+            \times 
+            \left( 1.225 - \min \left\{ 0.18,\frac{0.135\times {lvl}}{{lvl} + 50} \right\} \right)^{lvl}-30
+            \right\rfloor
+            \\ 
+            XP_{Construction} =  &\
+                \left\lceil
+                \left( 10+{lvl}^{2.81}+4\times lvl \right)
+                \times 
+                \left( 1.117 - \frac{0.135\times {lvl}}{{lvl} + 5} \right)^{lvl}-6
+                \right\rceil
+            \\ 
+            XP_{Worship} =  &\
+                \left\lfloor
+                \left( 15+{lvl}^{1.3}+6\times lvl \right)
+                \times 
+                \left( 1.17 - \min \left\{ 0.07,\frac{0.135\times {lvl}}{{lvl} + 50} \right\} \right)^{lvl}-26
+                \right\rfloor
         \end{align*}
+        %	Figure : XP needed per level
+        \pic{png}{XP-FG-xp}{XP needed per level}{0.6}{h!}
 
+    \newpage
     %	Fighting Formula
     \section{Fighting Formulas}
         %	Damage Done
@@ -33,10 +60,11 @@
                 \\
                 {Damage}_{min} =&\ {Damage}_{max} \times Mastery
             \end{align*}
+            \information{Mastery caps at 80\%.}
         %	Damage taken per hit
         \subsection{Damage taken per hit}
             \begin{align*}
-                Damage = &\
+                dmgPerHit = &\
                     \left\lceil
                     \frac{ {attack}_{enemy} - 2.5 \times {defense}^{0.8} }
                         { \max \left\{1,1+ \frac{ {defense}^{1.5}}
@@ -49,15 +77,104 @@
 
         %	AFK damage cap
         \subsection{AFK damage cap}
-            \imp{TODO}
+            \todo{}
         %	Food Consumption
         \subsection{Food Consumption}
-            \imp{TODO}
+
+            \begin{align*}
+                Grasslands = &\ \frac{dmgPerHit * 300}{
+                    \min\left\{
+                        foodHeal, maxhp
+                    \right\} 
+                    }
+                \\
+                \\
+                Desert = &\ \frac{dmgPerHit * 500}{
+                    \min\left\{
+                        foodHeal, maxhp
+                    \right\} 
+                    }
+                \\
+                \\
+                Tundra = &\ \frac{dmgPerHit * 600}{
+                    \min\left\{
+                        foodHeal, maxhp
+                    \right\} 
+                    }
+            \end{align*}
+
         %	Hourly Kill Cap
         \subsection{Hourly Kill Cap}
-            \imp{TODO}
-
+            \todo{}
         %	\% hit by 
         \subsection{\% chance to hit depending on the accuracy}
-            \imp{TODO}
-    
+            \begin{align*}
+                hitChance = &\ 100 \times \left( 0.95 \times \frac{3 \times yourAcc}{2 \times acc} - 0.425\right) 
+            \end{align*}
+            \begin{itemize}
+                \item $acc$ is the accuracy needed to have a 100\% chance to hit.
+            \end{itemize}
+
+        \newpage
+        %	Multikill/Overkill
+        \subsection{Multikill}
+            % For Death Note Multikill, 1 point = 1\%.
+            % \newline
+            % \newline
+            % Afk gain only shows multikill from death note, other bonuses are ignored in the display but taken into account in the kill count.
+            % \begin{align*}
+            %     damageForThreshold = &\ mobHP \times 2^{threshold} \\
+            %     multikillTier = &\ \log_2\left( \frac{Damage_{max}}{mobHP} \right) \\
+            %     multikill = &\ 1 + \left(
+            %         \frac{saltUp_\% + stamp_\% + dN_\% + dNUp_\% + vial_\%}{100}
+            %     \right) 
+            %     \times 
+            %     \left\lfloor 
+            %         multikillTier
+            %     \right\rfloor 
+            % \end{align*}
+            % \begin{itemize}
+            %     \item $saltUp_\%$ : 9th Salt Lick upgrade.
+            %     \item $stamp_\%$ : Multikill Stamp.
+            %     \item $dN_\%$ : Death Note value.
+            %     \item $dNUp_\%$ : Death Note upgrade.
+            %     \item $vial_\%$ : Slowergy Drink Vial.
+            % \end{itemize}
+            \todo{}
+        \subsection{Sampling}
+            \todo{}
+            \newline
+            \newline
+            Just a guess as of now but it might be $nbKills \times baseDropChance \times sampling_\%$ where $BaseDropchance$ is unaffected by drop rate.
+
+        \newpage
+        %------------------------------------------------------------------------------
+        %	Family Bonuses
+        %------------------------------------------------------------------------------
+        \section{Family Bonuses}
+            \begin{align*}
+                Archer = &\ 1 + \left\lfloor \frac{lvl-9}{5}\right\rfloor 
+                \\
+                Hunter = &\ \frac{(lvl-29) \times 30}{lvl+71}
+                \\
+                Bowman = &\ \frac{(lvl-29) \times 38}{lvl+71}
+                \\
+                \\
+                Mage = &\ 1 + \left\lfloor \frac{lvl-9}{5}\right\rfloor 
+                \\
+                Wizard = &\ 1 + \left\lfloor \frac{lvl-29}{8}\right\rfloor 
+                \\
+                Shaman = &\ 1 + \frac{(lvl-29) \times 0.4}{lvl + 71}
+                \\
+                \\
+                Warrior = &\ 1 + \left\lfloor \frac{lvl-9}{5}\right\rfloor 
+                \\
+                Barbarian = &\ \frac{(lvl-29) \times 25}{lvl+71}
+                \\
+                Squire = &\ \frac{(lvl-29) \times 40}{lvl+71}
+                \\
+                \\
+                Journeyman = &\ 1 + \left\lfloor \frac{lvl-9}{5}\right\rfloor 
+            \end{align*}
+            %	Figure : Bonuses evolution per character lvl
+            \pic{png}{FAMILY-FG-bonuses}{Bonuses scaling per character lvl}{0.60}{h!}

@@ -1,4 +1,31 @@
 \chapter{Alchemy}
+    Here is your base brewspeed, as well as your xp/hour: 
+    \begin{align*}
+        p2wBonus = &\ AlchSpeedP2W \times AlchLvl 
+        \\
+        talentBonus = &\ BusyBrewing + BrokenTime + GuildPerk + StarSigns
+        \\ 
+        \\
+        IF \ WIS < 1000: \ \ wisBonus = &\ \frac{(WIS+1)^{0.37}-1}{40} 
+        \\ 
+        ELSE: \ \ wisBonus = &\ 0.5 \times \frac{(WIS-1000)}{WIS+2500}+0.255
+        \\ 
+        \\ 
+        Bonus = &\ p2wBonus \times \left( 1 + \frac{wisBonus}{0.6}\right) \times \left( 1+ \frac{talentBonus}{100}\right)
+        \\ 
+        brewSpeed = &\ \left\lfloor AlchLvl^{0.8} \right\rceil  \times \left( 1+ \frac{stamp+Bubble+Box}{100}\right)\times \left( 1+\frac{Bonus}{100}\right)
+        \\ 
+        \\ 
+        xp_{/hour}= &\ brewSpeed \times alchExpMultiplier 
+    \end{align*}
+    Multiply $xp_{/hour}$ by 15 if you are in a cauldron, by 30 if you are in liquid.
+    \\ 
+    \\ 
+    \bug{GuildPerk doesn't work as of version 1.20b but it should be fixed with the next patch.}
+    \\ 
+    \\ 
+    \information{xp/hour on AFK seems to misbehave. When testing I got some weird results : As if my character was in Cauldron whereas it was in liquid.}
+    \newpage
     %------------------------------------------------------------------------------
     %	Liquid \& Cauldron
     %------------------------------------------------------------------------------
@@ -11,10 +38,21 @@
                     \times 
                     \left( 1+ \frac{ stamp_\% + \sum \left( (alchLvl * 2 + 4 )^{0.65} \right) }{100} \right)
             \end{align*}
+            \todo{ADD SALT LICK FACTOR}
             \begin{itemize}
-                \item $RLP2W_\%$ is P2W Liquid Regen, see \ref{sec:p2w}
+                \item $RLP2W_\%$ is P2W Liquid Regen, see \ref{sec:p2w}.
+                \item $stamp_\%$ is Drippy Drop Stamp.
+                \item $decant_\%$ is regen decanting.
             \end{itemize}
             Multiply $liquid_{/hour}$ by $1.5$ if you bought the gem upgrade.
+            \newline
+            \newline
+            As you can see, the vial effect is rather insignificant. Characters lvl can't be bought, you just have to wait. So it lets us with $decant_\%$, $RLP2W_\%$ and $stamp_\%$. Whether or not to "waste" water is up to you, but do know that in the long run $decant_\%$ is at the moment the most powerful upgrade. 
+            \newline
+            \newline
+            As for $RLP2W_\%$ and $stamp_\%$, it's up to you to know which one will have the most impact, but here is a graphic showing \% gained  based on the cost (doesn't take into account material cost): 
+                %	Figure : Gain per cost based comparison of P2W Regen vs Drippy Drop
+                \pic{png}{AlchP2W-FG-cost_p2w_vs_cost_stamp}{Gain per cost based comparison of P2W Regen and Drippy Drop}{0.8}{h!}
         
 
         %	Cauldron
@@ -25,14 +63,14 @@
             \begin{itemize}
                 \item $n$ is your number of bubbles unlocked.
             \end{itemize}
-            \imp{TODO}
+            \todo{}
 
     \newpage
     %------------------------------------------------------------------------------
     %	Bubble
     %------------------------------------------------------------------------------
     \section{Bubble}
-        \imp{TODO}
+        \todo{}
 
     \newpage
     %------------------------------------------------------------------------------
@@ -66,7 +104,45 @@
                         3750\left(1.2-\frac{0.14boostLvl}{100+boostLvl}\right)^{boostLvl}
                     \right\rceil 
             \end{align*}
-        
+            %	Vials
+            \subsection{Vials}
+            \begin{align*}
+                cap =  &\ capLvl
+                \\ 
+                cap_{Cost} = &\ 
+                    \left\lfloor 
+                        10000 \times 2^{capLvl}
+                    \right\rceil 
+                \\ 
+                \\
+                rng = &\  \frac{250 \times rngLvl}{100+rngLvl}
+                \\ 
+                rng_{Cost} = &\ 
+                    \left\lfloor 
+                        5000 \times 1.25^{rngLvl}
+                    \right\rceil 
+                \\ 
+            \end{align*}
+            \bug{rng doesn't work at the moment (v1.14). }
+        %	Player
+        \subsection{Player}
+            \begin{align*}
+                AlchSpeed_\% = &\ \frac{35 \times AlchSpeedLvl}{100+AlchSpeedLvl} 
+                \\ 
+                AlchSpeed_{Cost} = &\ 
+                    \left\lfloor 
+                        4000\left(1.15-\frac{0.1AlchSpeedLvl}{100+AlchSpeedLvl}^{AlchSpeedLvl}\right) 
+                    \right\rceil 
+                \\ 
+                \\
+                ExtraXP_\% = &\ \frac{11 + 0.5 \times (ExtraXPLvl-1)}{10} \times ExtraXPLvl
+                \\
+                ExtraXP_{Cost} = &\ 
+                \left\lfloor 
+                    6000\left(1.15-\frac{0.09AlchSpeedLvl}{100+AlchSpeedLvl}^{AlchSpeedLvl}\right) 
+                \right\rceil 
+            \end{align*}
+    
         \newpage
         %	Liquid
         \subsection{Liquid}
@@ -87,42 +163,4 @@
                     \right\rceil 
             \end{align*}
             %	Figure : How much you gain with p2w
-            \pic{png}{p2w_regen_formula_graph}{How much regen you gain with p2w}{0.7}{h!}
-        %	Vials
-        \subsection{Vials}
-            \begin{align*}
-                cap =  &\ capLvl
-                \\ 
-                cap_{Cost} = &\ 
-                    \left\lfloor 
-                        10000 \times 2^{capLvl}
-                    \right\rceil 
-                \\ 
-                \\
-                rng = &\  \frac{250 \times rngLvl}{100+rngLvl}
-                \\ 
-                rng_{Cost} = &\ 
-                    \left\lfloor 
-                        5000 \times 1.25^{rngLvl}
-                    \right\rceil 
-                \\ 
-            \end{align*}
-            \imp{Note:} rng doesn't work at the moment (v1.14). 
-        %	Player
-        \subsection{Player}
-            \begin{align*}
-                AlchSpeed_\% = &\ \frac{35 \times AlchSpeedLvl}{100+AlchSpeedLvl} 
-                \\ 
-                AlchSpeed_{Cost} = &\ 
-                    \left\lfloor 
-                        4000\left(1.15-\frac{0.1AlchSpeedLvl}{100+AlchSpeedLvl}^{AlchSpeedLvl}\right) 
-                    \right\rceil 
-                \\ 
-                \\
-                ExtraXP_\% = &\ \frac{11 + 0.5 \times (ExtraXPLvl-1)}{10} \times ExtraXPLvl
-                \\
-                ExtraXP_{Cost} = &\ 
-                \left\lfloor 
-                    6000\left(1.15-\frac{0.09AlchSpeedLvl}{100+AlchSpeedLvl}^{AlchSpeedLvl}\right) 
-                \right\rceil 
-            \end{align*}
+            \pic{png}{AlchP2W-FG-liquid_regen}{How much regen you gain with p2w}{0.7}{h!}
